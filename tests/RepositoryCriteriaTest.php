@@ -48,6 +48,7 @@ class RepositoryCriteriaTest extends RelationalTestCase
         $this->assertTrue(isset($authors[0]));
         $this->assertTrue((new \DateTime($authors[0]->created_at)) <= new DateTime(OldThen2000Criteria::DATE));
         $this->assertTrue(isset($authors[0]['posts']));
+        $this->assertTrue(isset($authors[0]->posts[0]));
     }
 
     public function testHasCriteria()
@@ -78,5 +79,4 @@ class RepositoryCriteriaTest extends RelationalTestCase
         $authors = $authorRepository->all();
         $this->assertTrue(isset($authors[0]['posts']));
     }
-
 }

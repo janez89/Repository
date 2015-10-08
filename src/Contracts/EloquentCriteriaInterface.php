@@ -8,9 +8,7 @@
 
 namespace Janez89\Repository\Contracts;
 
-use Illuminate\Database\Eloquent\Builder;
-
 interface EloquentCriteriaInterface
 {
-    public function apply(Builder $query, RepositoryInterface $repository);
+    public function apply($query, RepositoryInterface $repository);
 }

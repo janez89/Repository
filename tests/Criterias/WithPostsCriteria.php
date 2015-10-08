@@ -9,11 +9,10 @@
 
 use \Janez89\Repository\Contracts\EloquentCriteriaInterface;
 use \Janez89\Repository\Contracts\RepositoryInterface;
-use \Illuminate\Database\Eloquent\Builder;
 
 class WithPostsCriteria implements EloquentCriteriaInterface
 {
-    public function apply(Builder $query, RepositoryInterface $repository)
+    public function apply($query, RepositoryInterface $repository)
     {
         $query->with('posts');
     }
