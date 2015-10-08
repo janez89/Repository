@@ -24,6 +24,7 @@ abstract class FunctionalTestCase extends PHPUnit_Framework_TestCase
         ));
         $db->bootEloquent();
         $db->setAsGlobal();
+        DB::connection()->enableQueryLog();
     }
 
     /**
@@ -35,5 +36,11 @@ abstract class FunctionalTestCase extends PHPUnit_Framework_TestCase
             $this->_faker = Faker\Factory::create();
 
         return $this->_faker;
+    }
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        //print_r(DB::getQueryLog());
     }
 }

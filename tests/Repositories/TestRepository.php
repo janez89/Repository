@@ -9,6 +9,7 @@
 class TestRepository extends Janez89\Repository\AbstractEloquentRepository
 {
     use \Janez89\Repository\Traits\EloquentTransactional;
+    use \Janez89\Repository\Traits\DataTables;
 
     public function getModelClass()
     {
