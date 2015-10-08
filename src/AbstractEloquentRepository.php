@@ -58,6 +58,11 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
         return new $model;
     }
 
+    protected function initQuery()
+    {
+        return $this->model->newQuery();
+    }
+
     /**
      * Query based Context. Alias getModelContext method
      *
@@ -65,7 +70,7 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
      */
     protected function getQuery()
     {
-        $query = $this->model->newQuery();
+        $query = $this->initQuery();
 
         $this->applyCriteria($query);
         $this->applyScope($query);
@@ -85,6 +90,16 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
         $this->boot();
 
         return $this;
+    }
+
+    /**
+     * Retrieve first model from database
+     * @param array $columns
+     * @return \Illuminate\Database\Eloquent\Model|static
+     */
+    public function first($columns = ['*'])
+    {
+        return $this->getQuery()->firstOrFail($columns);
     }
 
     /**

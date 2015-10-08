@@ -12,6 +12,13 @@ namespace Janez89\Repository\Contracts;
 interface RepositoryInterface
 {
     /**
+     * Retrieve fist model from database
+     * @param array $columns
+     * @return Model
+     */
+    public function first($columns = ['*']);
+
+    /**
      * Retrieve model from database
      * @param $id
      * @param array $columns
