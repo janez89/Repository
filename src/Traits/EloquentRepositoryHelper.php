@@ -30,8 +30,8 @@ trait EloquentRepositoryHelper
      */
     protected function resolveDatabase()
     {
-        if (class_exists('\Illuminate\Support\Facades\DB', false))
-            return \Illuminate\Support\Facades\DB::class;
+        if (class_exists('\DB'))
+            return \DB::class;
 
         return \Illuminate\Database\Capsule\Manager::class;
     }
