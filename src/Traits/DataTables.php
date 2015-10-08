@@ -20,7 +20,8 @@ trait DataTables
         $response->data = $this->getQuery()
             ->skip($request->get('start'))
             ->take($request->get('length'))
-            ->get()->toArray();
+            ->get()
+            ->toArray();
 
         $response->recordsTotal = $this->getQuery()->count();
         $response->recordsFiltered = $response->recordsTotal;

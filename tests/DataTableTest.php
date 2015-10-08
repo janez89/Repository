@@ -132,4 +132,22 @@ class DataTableTest extends FunctionalTestCase
         $this->assertEquals(5, $result->recordsFiltered);
         $this->assertEquals(5, count($result->data));
     }
+
+    public function testDataTableLimitedFields()
+    {
+        $repo = new TestRepository();
+
+        $result = $repo
+            ->scope(function ($query) {
+                $query->select(['id', 'seq']);
+            })
+            ->dataTable($this->getRequestMock(0, 5 ,1));
+
+        $this->assertEquals(1, $result->draw);
+        $this->assertEquals(10, $result->recordsTotal);
+        $this->assertEquals(10, $result->recordsFiltered);
+        $this->assertTrue(is_array($result->data));
+        $this->assertEquals(5, count($result->data));
+        $this->assertEquals(2, count($result->data[0]));
+    }
 }
