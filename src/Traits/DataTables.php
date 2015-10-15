@@ -9,19 +9,21 @@
 namespace Janez89\Repository\Traits;
 
 
-use Illuminate\Support\Facades\Request;
-
 trait DataTables
 {
-    public function dataTable(Request $request)
+    public function dataTable($request)
     {
         $response = new \stdClass();
 
+        $limit = $request->get('length') > 1 ? (int) $request->get('length') : 1;
+        $offset = (int) $request->get('start');
+
         $response->data = $this->getQuery()
-            ->skip($request->get('start'))
-            ->take($request->get('length'))
+            ->take($limit)
+            ->skip($offset)
             ->get()
             ->toArray();
+
 
         $response->recordsTotal = $this->getQuery()->count();
         $response->recordsFiltered = $response->recordsTotal;
